@@ -38,6 +38,8 @@
 </head>
 <body>
 <table width="300" border="0" align="center" cellpadding="5" cellspacing="4" bgcolor="#FFFFFF">
+<tr>
+<td>
 <h3 id="titles">Now on Crystallite</h3>
 <p id="current">Loading...</p>
 
@@ -45,7 +47,9 @@
 <div id="history"></div>
 
 <p id="ts"></p>
-
+</td>
+</tr>
+</table>
 <script>
 async function updateSongs() {
   try {
@@ -71,6 +75,5 @@ async function updateSongs() {
 updateSongs();
 setInterval(updateSongs, 20000);
 </script>
-</table>
 </body>
 </html>
