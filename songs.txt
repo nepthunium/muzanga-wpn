@@ -1,2 +1,2 @@
-songs = {'current': 'Downtown, by KELLER BAND', 'history': ['CAN YOU FEEL THE LOVE TONIGHT, by NEPTUNE ORCHESTRA']}
-timestamp = 'Sun Sep 28 09:21:50 AM EDT 2025'
+songs = {'current': 'Hold On, by Juan's Linen', 'history': ['Downtown, by KELLER BAND', 'CAN YOU FEEL THE LOVE TONIGHT, by NEPTUNE ORCHESTRA']}
+timestamp = 'Sun Sep 28 09:24:25 AM EDT 2025'
