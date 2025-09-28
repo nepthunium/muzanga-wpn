@@ -1,19 +1,50 @@
-<html><head>
+<html>
+<head>
 <meta http-equiv='refresh' content='10'>
-</head><body>
+</head>
+<body>
 <h3>Now on Crystallite</h3>
-<p>Little Talks, by Keller Music</p>
+<p id="current">Loading...</p>
 
 <h3>The last ten songs on Crystallite</h3>
-<p>Imagine, by JOE KELLER</p>
-<p>HOW CAN I BE SURE, by Nep-Tunes</p>
-<p>---</p>
-<p>---</p>
-<p>---</p>
-<p>---</p>
-<p>---</p>
-<p>---</p>
-<p>---</p>
-<p>---</p>
-<p>Updated: Sun Sep 28 09:08:24 AM EDT 2025</p>
-</body></html>
+<div id="history"></div>
+
+<p id="ts"></p>
+
+<script>
+async function updateSongs() {
+  try {
+    const response = await fetch('songs.txt');
+    const text = await response.text();
+
+    // Eval the file to define `songs` and `timestamp`
+    eval(text);
+
+    // Update current song
+    document.getElementById('current').textContent = songs.current;
+
+    // Update history, always 10 items, pad with ---
+    const historyEl = document.getElementById('history');
+    historyEl.innerHTML = '';
+
+    const paddedHistory = songs.history.concat(Array(10 - songs.history.length).fill('---'));
+
+    paddedHistory.forEach(song => {
+      const p = document.createElement('p');
+      p.textContent = song;
+      historyEl.appendChild(p);
+    });
+
+    // Update timestamp
+    document.getElementById('ts').textContent = `Updated: ${timestamp}`;
+  } catch (err) {
+    console.error('Failed to fetch songs:', err);
+  }
+}
+
+// Update every 10 seconds
+updateSongs();
+setInterval(updateSongs, 10000);
+</script>
+</body>
+</html>
