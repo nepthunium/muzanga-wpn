@@ -14,35 +14,25 @@
 <script>
 async function updateSongs() {
   try {
-    const response = await fetch('songs.txt');
-    const text = await response.text();
+    const response = await fetch('songs.json?' + new Date().getTime());
+    const data = await response.json(); // safer than eval
 
-    // Eval the file to define `songs` and `timestamp`
-    eval(text);
+    document.getElementById('current').textContent = data.current;
 
-    // Update current song
-    document.getElementById('current').textContent = songs.current;
-
-    // Update history, always 10 items, pad with ---
     const historyEl = document.getElementById('history');
     historyEl.innerHTML = '';
-
-    const paddedHistory = songs.history.concat(Array(10 - songs.history.length).fill('---'));
-
-    paddedHistory.forEach(song => {
+    data.history.forEach(song => {
       const p = document.createElement('p');
       p.textContent = song;
       historyEl.appendChild(p);
     });
 
-    // Update timestamp
-    document.getElementById('ts').textContent = `Updated: ${timestamp}`;
+    document.getElementById('ts').textContent = `Updated: ${data.timestamp}`;
   } catch (err) {
     console.error('Failed to fetch songs:', err);
   }
 }
 
-// Update every 10 seconds
 updateSongs();
 setInterval(updateSongs, 10000);
 </script>
